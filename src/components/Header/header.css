@@ -1,0 +1,28 @@
+/* headerblock {
+  display: 'flex';
+  backgroundcolor: '#0f172a';
+  justifycontent: 'space-between'
+  alignitems: 'center'
+  padding: '16px 32px'
+  backgroundcolor: '#0f172a';
+  color: '#ffffff';
+  fontsize: '18px';
+  fontweight: '500';
+  boxshadow: '0 2px 8px rgba(0,0,0,0.1)';
+} */
+
+.headerblock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #0f172a;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+}
