@@ -2,17 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header.jsx';
 import { ports } from './data';
-
-function Learning(props) {
-  console.log(props);
-  return (
-    <li>
-      <p>
-        <strong>1 row</strong>1 row coment
-      </p>
-    </li>
-  );
-}
+import Learning from './components/Learning.jsx';
+import Button from './components/Button/Button.jsx';
 
 export default function App() {
   return (
@@ -23,9 +14,17 @@ export default function App() {
         <section>
           <h3>Start list</h3>
           <ul>
-            <Learning title="11" deacription="22" />
-            <Learning title="3311" deacription="4422" />
+            <Learning
+              title={ports[0].title}
+              description={ports[0].description}
+            />
+            <Learning {...ports[1]} />
+            <Learning {...ports[2]} />
           </ul>
+        </section>
+        <section>
+          <h3>Заголовок 3</h3>
+          <Button></Button>
         </section>
       </main>
     </div>
