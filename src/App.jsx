@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header.jsx';
-import { ports } from './data';
+import { ports, differences } from './data';
 import Learning from './components/Learning.jsx';
 import Button from './components/Button/Button.jsx';
 
 export default function App() {
+  const [content, setContent] = useState('Нажми на кнопку');
+
+  function handleClick(type) {
+    // console.log('Button clicked!!!', differences[type]);
+    setContent(type);
+  }
+  console.log('content', content);
+  //   console.log('differences', differences[content]);
   return (
     <div>
       <Header />
@@ -24,7 +32,11 @@ export default function App() {
         </section>
         <section>
           <h3>Заголовок 3</h3>
-          <Button></Button>
+          <Button onClick={() => handleClick('way')}>Variant 1</Button>
+          <Button onClick={() => handleClick('easy')}>Variant 2</Button>
+          <Button onClick={() => handleClick('hard')}>Variant 3</Button>
+
+          <p>{differences[content]}</p>
         </section>
       </main>
     </div>

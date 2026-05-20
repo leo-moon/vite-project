@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import './header.css';
 import dayjs from 'dayjs';
 import logo from '/vite.svg';
 
 export default function Header() {
-  const now = dayjs();
-  console.log(now);
+  const [now, setNow] = useState(dayjs());
+  setInterval(() => {
+    setNow(dayjs());
+  }, 1000);
   return (
     // <header>
     <header>
