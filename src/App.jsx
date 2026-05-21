@@ -6,13 +6,21 @@ import Learning from './components/Learning.jsx';
 import Button from './components/Button/Button.jsx';
 
 export default function App() {
-  const [content, setContent] = useState('Нажми на кнопку');
+  const [contentType, setContentType] = useState(null);
 
   function handleClick(type) {
     // console.log('Button clicked!!!', differences[type]);
-    setContent(type);
+    setContentType(type);
   }
-  console.log('content', content);
+
+  //   let tabContent = null;
+  //   if (contentType) {
+  //     tabContent = <p>{differences[contentType]}</p>;
+  //   } else {
+  //     tabContent = <p>Click the button to see the differences</p>;
+  //   }
+
+  //   console.log('content', content);  1111111
   //   console.log('differences', differences[content]);
   return (
     <div>
@@ -22,21 +30,52 @@ export default function App() {
         <section>
           <h3>Start list</h3>
           <ul>
-            <Learning
+            {ports.map((item) => (
+              <Learning key={item.title} {...item} />
+            ))}
+            {/* <Learning
               title={ports[0].title}
               description={ports[0].description}
             />
             <Learning {...ports[1]} />
-            <Learning {...ports[2]} />
+            <Learning {...ports[2]} /> */}
           </ul>
         </section>
         <section>
           <h3>Заголовок 3</h3>
-          <Button onClick={() => handleClick('way')}>Variant 1</Button>
-          <Button onClick={() => handleClick('easy')}>Variant 2</Button>
-          <Button onClick={() => handleClick('hard')}>Variant 3</Button>
+          <Button
+            isActive={contentType === 'way'}
+            onClick={() => handleClick('way')}
+          >
+            Variant 1
+          </Button>
+          <Button
+            isActive={contentType === 'easy'}
+            onClick={() => handleClick('easy')}
+          >
+            Variant 2
+          </Button>
+          <Button
+            isActive={contentType === 'hard'}
+            onClick={() => handleClick('hard')}
+          >
+            Variant 3
+          </Button>
 
-          <p>{differences[content]}</p>
+          {/* {contentType ? (
+            <p>{differences[contentType]}</p>
+          ) : (
+            <p>Click the button to see the differences</p>
+          )} */}
+
+          {!contentType ? <p>Click the button to see the differences</p> : null}
+
+          {/* {contentType ? <p>{differences[contentType]}</p> : null} */}
+
+          {contentType && <h4>{differences[contentType]}</h4>}
+
+          {/* <p>{differences[contentType]}</p> */}
+          {/* {tabContent} */}
         </section>
       </main>
     </div>
