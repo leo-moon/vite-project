@@ -1,13 +1,15 @@
+import { useState } from 'react';
 import { differences } from '../../data';
 import Button from '../Button/Button.jsx';
 
-export default function MainSection({ contentType, handleClick }) {
-  //   const [contentType, setContentType] = useState(null);
+// export default function MainSection({ contentType, handleClick }) {
+export default function MainSection() {
+  const [contentType, setContentType] = useState(null);
 
-  //   function handleClick(type) {
-  //     // console.log('Button clicked!!!', differences[type]);
-  //     setContentType(type);
-  //   }
+  function handleClick(type) {
+    // console.log('Button clicked!!!', differences[type]);
+    setContentType(type);
+  }
 
   return (
     <section>
