@@ -7,8 +7,6 @@ export default function FeedbackSection() {
   const [hasError, setHasError] = useState(false);
   const [reason, setReason] = useState('question');
 
-  console.log(' hasError: ', hasError);
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -48,7 +46,7 @@ export default function FeedbackSection() {
           <option value="question">Питання</option>
           <option value="complaint">Скарга</option>
         </select>
-        <Button disabled={hasError}>Надіслати</Button>
+        <Button disabled={hasError || name.trim() === ''}>Надіслати</Button>
       </form>
     </section>
   );
