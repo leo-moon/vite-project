@@ -8,6 +8,10 @@
   margin-right: 1rem;
 }
 
+.button.disabled {
+  cursor: not-allowed;
+}
+
 .button:hover {
   opacity: 0.8;
 }

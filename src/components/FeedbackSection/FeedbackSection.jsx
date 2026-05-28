@@ -4,11 +4,18 @@ import { useState } from 'react';
 
 export default function FeedbackSection() {
   const [name, setName] = useState('');
+  const [hasError, setHasError] = useState(false);
   const [reason, setReason] = useState('question');
+
+  console.log(' hasError: ', hasError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+  };
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+    setHasError(e.target.value.trim() === '');
   };
 
   return (
@@ -23,17 +30,25 @@ export default function FeedbackSection() {
           placeholder="Ваше ім'я"
           className="control"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          style={{
+            border: hasError ? '1px solid red' : '1px solid #0ba4e0',
+            marginBottom: '20px',
+          }}
+          onChange={handleChangeName}
         />
-
-        <label htmlFor="reason">Причина звернення:</label>
-        <select id="reason" className="control" value={reason} onChange={(e) => setReason(e.target.value)}  >
-         value={reason} onChange={(e) => setReason(e.target.value)}>
+        <label htmlFor="reason">Оберіть причину звернення:</label>
+        <select
+          id="reason"
+          className="control"
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+        >
+          {/* <option value="choicereason">Оберіть причину</option> */}
           <option value="suggestion">Пропозиція</option>
           <option value="question">Питання</option>
           <option value="complaint">Скарга</option>
         </select>
-        <Button type="submit">Надіслати</Button>
+        <Button disabled={hasError}>Надіслати</Button>
       </form>
     </section>
   );
