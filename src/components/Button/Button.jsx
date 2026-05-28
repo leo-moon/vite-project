@@ -1,19 +1,17 @@
 import classes from './button.module.css';
-// import { styles } from './Button.module.css';
 
 export default function Button({ children, onClick, isActive }) {
-  console.log('Button rendered!!!', classes);
+  const buttonClasses = isActive
+    ? `${classes.button} ${classes.active}`
+    : classes.button;
+  //   const buttonClasses = `${classes.button} ${isActive ? `${classes.active}` : ''}`;
+
   return (
     // <button
     //   className={`classes.button ${isActive ? ' classes.active' : ''}`}
     //   onClick={onClick}
     // >
-    <button
-      className={
-        isActive ? `${classes.button} ${classes.active}` : classes.button
-      }
-      onClick={onClick}
-    >
+    <button className={buttonClasses} onClick={onClick}>
       {children}
     </button>
   );

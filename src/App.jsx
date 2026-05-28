@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import Header from './components/Header/Header.jsx';
+import Header from './components/Header/Header';
 import MainSection from './components/MainSection/MainSection.jsx';
 import IntroSection from './components/IntroSection/introSection.jsx';
 import TabSection from './components/TabSection/TabSection.jsx';
