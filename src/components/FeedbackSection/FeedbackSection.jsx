@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function FeedbackSection() {
   const [name, setName] = useState('');
   const [hasError, setHasError] = useState(false);
-  const [reason, setReason] = useState('question');
+  const [reason, setReason] = useState('first');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +15,8 @@ export default function FeedbackSection() {
     setName(e.target.value);
     setHasError(e.target.value.trim() === '');
   };
-
+  //   name.trim() === '' ? setHasError(true) : setHasError(false);
+  console.log('hasError: name.trim().length', hasError, name.trim().length > 0);
   return (
     <section className="feedback-section">
       <h3>Зворотній зв'язок</h3>
@@ -42,11 +43,18 @@ export default function FeedbackSection() {
           onChange={(e) => setReason(e.target.value)}
         >
           {/* <option value="choicereason">Оберіть причину</option> */}
+          <option value="first"> </option>
           <option value="suggestion">Пропозиція</option>
           <option value="question">Питання</option>
           <option value="complaint">Скарга</option>
         </select>
-        <Button disabled={hasError || name.trim() === ''}>Надіслати</Button>
+        {/* <Button disabled={!hasError || name.trim() === ''}>Надіслати</Button> */}
+        <Button
+          disabled={hasError || name.trim().length === 0}
+          isActive={name.trim().length > 0}
+        >
+          Надіслати
+        </Button>
       </form>
     </section>
   );
