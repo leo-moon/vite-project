@@ -2,24 +2,60 @@ import './FeedbackSection.css';
 import Button from '../Button/Button.jsx';
 import { useState } from 'react';
 
+function StateVsRef() {
+  const [inputValue, setInputValue] = useState('');
+
+  return (
+    <div>
+      <h3>Input value: {inputValue} </h3>
+      <input
+        type="text"
+        className="control"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+    </div>
+  );
+}
+
 export default function FeedbackSection() {
-  const [name, setName] = useState('');
-  const [hasError, setHasError] = useState(false);
-  const [reason, setReason] = useState('first');
+  //   const [name, setName] = useState('');
+  //   const [hasError, setHasError] = useState(false);
+  //   const [reason, setReason] = useState('first');
+  const [form, setForm] = useState({
+    name: '',
+    hasError: false,
+    reason: 'first',
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
+  // function toggleError() { setHasError((prev) => !prev);
+  //   }
+
   const handleChangeName = (e) => {
-    setName(e.target.value);
-    setHasError(e.target.value.trim() === '');
+    setForm((prev) => ({
+      ...prev,
+      name: e.target.value,
+      hasError: e.target.value.trim() === '',
+    }));
   };
   //   name.trim() === '' ? setHasError(true) : setHasError(false);
-  console.log('hasError: name.trim().length', hasError, name.trim().length > 0);
+  console.log(
+    'hasError: name.trim().length',
+    form.hasError,
+    form.name.trim().length > 0
+  );
   return (
     <section className="feedback-section">
       <h3>Зворотній зв'язок</h3>
+
+      {/* <Button onClick={toggleError}>
+        Toggle Error
+      </Button> */}
+
       <p>Ви можете залишити свій відгук тут.</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Ваше ім'я:</label>
@@ -28,9 +64,9 @@ export default function FeedbackSection() {
           id="name"
           placeholder="Ваше ім'я"
           className="control"
-          value={name}
+          value={form.name}
           style={{
-            border: hasError ? '1px solid red' : '1px solid #0ba4e0',
+            border: form.hasError ? '1px solid red' : '1px solid #0ba4e0',
             marginBottom: '20px',
           }}
           onChange={handleChangeName}
@@ -39,8 +75,10 @@ export default function FeedbackSection() {
         <select
           id="reason"
           className="control"
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
+          value={form.reason}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, reason: e.target.value }))
+          }
         >
           {/* <option value="choicereason">Оберіть причину</option> */}
           <option value="first"> </option>
@@ -48,14 +86,16 @@ export default function FeedbackSection() {
           <option value="question">Питання</option>
           <option value="complaint">Скарга</option>
         </select>
-        {/* <Button disabled={!hasError || name.trim() === ''}>Надіслати</Button> */}
+
         <Button
-          disabled={hasError || name.trim().length === 0}
-          isActive={name.trim().length > 0}
+          disabled={form.hasError || form.name.trim().length === 0}
+          isActive={form.name.trim().length > 0}
         >
           Надіслати
         </Button>
       </form>
+      <hr />
+      <StateVsRef />
     </section>
   );
 }
