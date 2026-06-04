@@ -1,18 +1,27 @@
 import './FeedbackSection.css';
 import Button from '../Button/Button.jsx';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 function StateVsRef() {
-  const [inputValue, setInputValue] = useState('');
+  //   const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef(null);
+  const [showInput, setShowInput] = useState(false);
+
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      setShowInput(true);
+    }
+  }
 
   return (
     <div>
-      <h3>Input value: {inputValue} </h3>
+      <h3>Input value: {showInput && inputRef.current.value} </h3>
       <input
+        ref={inputRef}
         type="text"
         className="control"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        // onChange={(e) => setInputValue(e.target.value)}
       />
     </div>
   );
