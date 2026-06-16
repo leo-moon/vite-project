@@ -19,6 +19,12 @@ export default function TabSection({ activeTab, onTabChange }) {
       >
         Зворотній зв'язок
       </Button>
+      <Button
+        isActive={activeTab === 'effect'}
+        onClick={() => onTabChange('effect')}
+      >
+        Ефекти
+      </Button>
       {/* <div className="tab-buttons">
         <button
           className={activeTab === 'tab1' ? 'active' : ''}

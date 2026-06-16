@@ -1,7 +1,7 @@
 import classes from './button.module.css';
 
 export default function Button({ children, isActive, ...props }) {
-  console.log('isActive:', isActive);
+  //   console.log('isActive:', isActive);
   const buttonClasses = isActive
     ? `${classes.button} ${classes.active}`
     : classes.button;

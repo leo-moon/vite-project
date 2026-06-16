@@ -5,9 +5,11 @@ import MainSection from './components/MainSection/MainSection.jsx';
 import IntroSection from './components/IntroSection/introSection.jsx';
 import TabSection from './components/TabSection/TabSection.jsx';
 import FeedbackSection from './components/FeedbackSection/FeedbackSection.jsx';
+import EffectSection from './components/EffectSection.jsx';
+import Examination from './components/Examination.jsx';
 
 export default function App() {
-  const [tab, setTab] = useState('main');
+  const [tab, setTab] = useState('effect');
   //   const [page, setPage] = useState('home');
   //   let tabContent = null;
   //   if (contentType) {
@@ -19,6 +21,8 @@ export default function App() {
     <>
       <Header />
       <main>
+        {/* <Examination /> */}
+
         <TabSection
           activeTab={tab}
           onTabChange={(current) => setTab(current)}
@@ -31,6 +35,7 @@ export default function App() {
           </>
         )}
         {tab === 'feedback' && <FeedbackSection />}
+        {tab === 'effect' && <EffectSection />}
       </main>
     </>
   );

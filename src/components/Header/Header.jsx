@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import './header.css';
 import dayjs from 'dayjs';
 import logo from '/logo55x55.png';
@@ -31,9 +31,12 @@ const logoStyle = {
 
 export default function Header() {
   const [now, setNow] = useState(dayjs());
-  setInterval(() => {
-    setNow(dayjs());
-  }, 1000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(dayjs());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <StyledHeader>
       <img src={logo} alt="" style={logoStyle} />
