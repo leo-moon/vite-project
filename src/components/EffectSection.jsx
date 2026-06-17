@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
-import { useInput } from './hooks/useinput';
+import useInput from './hooks/useInput';
 
 export default function EffectSection() {
   const input = useInput('');
@@ -57,9 +57,13 @@ export default function EffectSection() {
           />
           {/* <h6>{input.value}</h6> */}
           <ul>
-            {users.map((user) => (
-              <li key={user.id}>{user.name}</li>
-            ))}
+            {users
+              .filter((user) =>
+                user.name.toLowerCase().includes(input.value.toLowerCase())
+              )
+              .map((user) => (
+                <li key={user.id}>{user.name}</li>
+              ))}
           </ul>
         </>
       )}
