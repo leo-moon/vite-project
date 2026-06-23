@@ -44,7 +44,7 @@ export default function Header() {
         <MenuButton />
       </div>
       <a href="https://nlu.edu.ua" target="_blank" rel="noopener noreferrer">
-        <img src={logo} alt="" style={logoStyle} />{' '}
+        <img src={logo} alt="" style={logoStyle} />
       </a>
       <h3 style={{ margin: 0, marginLeft: '1rem' }}>Header</h3>
       <p style={{ marginLeft: 'auto', marginRight: '1rem' }}>User: John Doe</p>

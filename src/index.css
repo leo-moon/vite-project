@@ -77,3 +77,47 @@ button:focus-visible {
   min-width: 250px;
   margin: 0 0 auto 15px;
 }
+
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* img,
+svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+} */
+
+/* a {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    cursor: url(./images/cursor.png), auto;
+  }
+} */
+
+address {
+  font-style: normal;
+}
+
+/* button:hover,
+button:focus {
+  cursor: url(./images/cursor.png), auto;
+} */
