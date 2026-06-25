@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+// контейнер для контента, который будет отображаться в зависимости от выбранного пункта меню
 
 const ContentContainer = styled.main`
   flex: 1;
