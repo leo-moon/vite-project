@@ -34,20 +34,24 @@ const MenuOverlay = styled.div`
   z-index: 1000;
   display: flex;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: flex-start;
   padding: 1rem;
 `;
 
 const MenuPanel = styled.nav`
   width: min(340px, 100%);
   max-width: 360px;
-  background: #ffffff;
-  color: #102a43;
+  background: ${(props) =>
+    props.themeMode === 'dark' ? '#0f1940' : 'var(--surface)'};
+  color: ${(props) =>
+    props.themeMode === 'dark' ? '#e2e8f0' : 'var(--text-primary)'};
   border-radius: 18px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
+  height: auto;
+  max-height: calc(100vh - 3rem);
   overflow: hidden;
 `;
 
@@ -61,7 +65,7 @@ const MenuPanelHeader = styled.div`
 const CloseButton = styled.button`
   border: none;
   background: transparent;
-  color: #102a43;
+  color: var(--text-primary);
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
@@ -69,7 +73,7 @@ const CloseButton = styled.button`
   transition: color 0.2s ease;
 
   &:hover {
-    color: #0b3d91;
+    color: var(--accent);
   }
 `;
 
@@ -77,19 +81,27 @@ const MenuTitle = styled.h2`
   margin: 0;
   font-size: 1.1rem;
   letter-spacing: 0.02em;
+  color: var(--text-primary);
 `;
+
+const MENU_ITEM_HEIGHT = 4.5;
 
 const MenuList = styled.ul`
   list-style: none;
-  padding: 0;
+  padding: 0 0 3rem;
   margin: 0;
   display: grid;
   gap: 0.75rem;
+  overflow-y: auto;
+  max-height: calc(
+    ${({ itemCount }) => itemCount * MENU_ITEM_HEIGHT}rem + 3rem
+  );
 `;
 
 const MenuItem = styled.li`
   border-radius: 14px;
-  background: #f8fbff;
+  background: ${(props) =>
+    props.themeMode === 'dark' ? '#102540' : 'var(--surface-2)'};
   box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05);
 `;
 
@@ -117,13 +129,23 @@ const FacultySelect = styled.select`
   margin-left: 1rem;
   padding: 0.5rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid var(--button-border);
-  background: var(--button-bg);
-  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #0f1940;
+  color: #e2e8f0;
   cursor: pointer;
   font-size: 0.95rem;
   outline: none;
+  appearance: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+  }
 `;
+
+const facultyOptions = ['Все факультеты', ...faculties];
 
 export default function Header({
   currentModuleName = 'Модуль-1',
@@ -133,7 +155,7 @@ export default function Header({
 }) {
   const [now, setNow] = useState(dayjs());
   const [menuOpen, setMenuOpen] = useState(false);
-  const [faculty, setFaculty] = useState(faculties[0]);
+  const [faculty, setFaculty] = useState(facultyOptions[0]);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -205,7 +227,7 @@ export default function Header({
           onChange={(event) => setFaculty(event.target.value)}
           aria-label="Выбор факультета"
         >
-          {faculties.map((item) => (
+          {facultyOptions.map((item) => (
             <option key={item} value={item}>
               {item}
             </option>
@@ -234,8 +256,8 @@ export default function Header({
         </span>
       </StyledHeader>
       {menuOpen && (
-        <MenuOverlay role="dialog" aria-modal="true" ref={menuRef}>
-          <MenuPanel>
+        <MenuOverlay role="dialog" aria-modal="true">
+          <MenuPanel themeMode={currentTheme} ref={menuRef}>
             <MenuPanelHeader>
               <MenuTitle>Модули</MenuTitle>
               <CloseButton
@@ -245,7 +267,7 @@ export default function Header({
                 ✕
               </CloseButton>
             </MenuPanelHeader>
-            <MenuList>
+            <MenuList itemCount={modules.length}>
               {modules.map((module) => (
                 <MenuItem key={module.id}>
                   <MenuItemButton
